@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="org.skripnal.Item" table="item">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="increment"/>
+        </id>
+        <property name="total" type="int">
+            <column name="total"/>
+        </property>
+        <set name="carts" table="cart_item" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="item_id"/>
+            </key>
+            <many-to-many entity-name="org.skripnal.Cart">
+                <column name="cart_id"/>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
